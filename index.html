@@ -853,12 +853,12 @@ p {
 <!-- Slide 1: Title -->
 <!-- Boot Sequence Overlay -->
 <div class="boot-overlay" id="boot-overlay">
-    <div class="boot-line" data-delay="300">[<span class="ok">OK</span>] Connecting to exchanges...</div>
-    <div class="boot-line" data-delay="700">[<span class="ok">OK</span>] Signal feeds authenticated</div>
-    <div class="boot-line" data-delay="1100">[<span class="ok">OK</span>] Risk engine initialized</div>
-    <div class="boot-line" data-delay="1500">[<span class="ok">OK</span>] Dashboard online</div>
-    <div class="boot-line" data-delay="1900">[<span class="ok">OK</span>] Self-healing reconciler armed</div>
-    <div class="boot-line" data-delay="2400"><span style="color: var(--accent-green);">&gt; vertex ready</span><span class="boot-cursor"></span></div>
+    <div class="boot-line" data-delay="500">[<span class="ok">OK</span>] Connecting to exchanges...</div>
+    <div class="boot-line" data-delay="1200">[<span class="ok">OK</span>] Signal feeds authenticated</div>
+    <div class="boot-line" data-delay="1900">[<span class="ok">OK</span>] Risk engine initialized</div>
+    <div class="boot-line" data-delay="2600">[<span class="ok">OK</span>] Dashboard online</div>
+    <div class="boot-line" data-delay="3300">[<span class="ok">OK</span>] Self-healing reconciler armed</div>
+    <div class="boot-line" data-delay="4200"><span style="color: var(--accent-green);">&gt; vertex ready</span><span class="boot-cursor"></span></div>
 </div>
 
 <div class="slide title-slide active" data-slide="0">
@@ -1435,8 +1435,8 @@ document.addEventListener('touchend', (e) => {
         setTimeout(() => line.classList.add('visible'), delay);
     });
     // Fade out overlay after last line + pause
-    setTimeout(() => overlay.classList.add('fade-out'), 3400);
-    setTimeout(() => overlay.remove(), 4000);
+    setTimeout(() => overlay.classList.add('fade-out'), 5500);
+    setTimeout(() => overlay.remove(), 6200);
 })();
 </script>
 </body>
