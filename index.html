@@ -751,41 +751,39 @@ p {
     </div>
 </div>
 
-<!-- Slide 2: The Numbers -->
+<!-- Slide 2: Speed Comparison — immediate hook -->
 <div class="slide" data-slide="1">
-    <h2>By the Numbers</h2>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-value highlight">113K</div>
-            <div class="stat-label">Lines of Python</div>
+    <h2>How Fast Is Fast?</h2>
+    <div class="speed-track">
+        <div class="speed-row">
+            <div class="speed-label">You open TradingView</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 100%; background: var(--accent-red);">3,000 ms</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value highlight-blue">2,402</div>
-            <div class="stat-label">Test Cases</div>
+        <div class="speed-row">
+            <div class="speed-label">You find the pair</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 85%; background: var(--accent-orange);">2,500 ms</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value highlight-yellow">450</div>
-            <div class="stat-label">Commits</div>
+        <div class="speed-row">
+            <div class="speed-label">You click Market Buy</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 27%; background: var(--accent-yellow);">800 ms</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value highlight-purple">210</div>
-            <div class="stat-label">Source Modules</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value highlight-orange">37</div>
-            <div class="stat-label">Days to Build</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value highlight-red">17</div>
-            <div class="stat-label">Packages</div>
+        <div class="speed-row">
+            <div class="speed-label">Vertex: signal &rarr; order filled</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 1.7%; background: var(--accent-green); min-width: 70px;">50 ms</div>
+            </div>
         </div>
     </div>
-    <p style="margin-top: 24px; text-align: center; font-size: 14px;">
-        56K source + 57K tests &mdash; <span class="highlight">1:1 test-to-source ratio</span>
-    </p>
+    <div class="speed-punchline">You blinked. Vertex already took profit.</div>
 </div>
 
-<!-- Slide 3: Architecture -->
+<!-- Slide 3: Architecture — how it's so fast -->
 <div class="slide" data-slide="2">
     <h2>Architecture</h2>
     <div class="arch-flow">
@@ -834,40 +832,8 @@ p {
     </p>
 </div>
 
-<!-- Slide 4: Speed Comparison -->
+<!-- Slide 4: Key Features -->
 <div class="slide" data-slide="3">
-    <h2>How Fast Is Fast?</h2>
-    <div class="speed-track">
-        <div class="speed-row">
-            <div class="speed-label">You open TradingView</div>
-            <div class="speed-bar-track">
-                <div class="speed-bar" style="width: 100%; background: var(--accent-red);">3,000 ms</div>
-            </div>
-        </div>
-        <div class="speed-row">
-            <div class="speed-label">You find the pair</div>
-            <div class="speed-bar-track">
-                <div class="speed-bar" style="width: 85%; background: var(--accent-orange);">2,500 ms</div>
-            </div>
-        </div>
-        <div class="speed-row">
-            <div class="speed-label">You click Market Buy</div>
-            <div class="speed-bar-track">
-                <div class="speed-bar" style="width: 27%; background: var(--accent-yellow);">800 ms</div>
-            </div>
-        </div>
-        <div class="speed-row">
-            <div class="speed-label">Vertex: signal &rarr; order filled</div>
-            <div class="speed-bar-track">
-                <div class="speed-bar" style="width: 1.7%; background: var(--accent-green); min-width: 70px;">50 ms</div>
-            </div>
-        </div>
-    </div>
-    <div class="speed-punchline">You blinked. Vertex already took profit.</div>
-</div>
-
-<!-- Slide 5: Key Features -->
-<div class="slide" data-slide="4">
     <h2>Feature Highlights</h2>
     <div class="features-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="feature-card">
@@ -927,8 +893,8 @@ p {
     </div>
 </div>
 
-<!-- Slide 6: Screenshot — Overview Dashboard -->
-<div class="slide screenshot-slide" data-slide="5">
+<!-- Slide 5: Screenshot — Overview Dashboard -->
+<div class="slide screenshot-slide" data-slide="4">
     <h2>Live Dashboard</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/01_overview_dashboard.png" alt="Overview Dashboard">
@@ -936,8 +902,8 @@ p {
     <p class="screenshot-caption">Real-time connectivity, risk radar, exposure tracking, and data freshness at a glance</p>
 </div>
 
-<!-- Slide 7: Screenshot — Stock Portfolio -->
-<div class="slide screenshot-slide" data-slide="6">
+<!-- Slide 6: Screenshot — Stock Portfolio -->
+<div class="slide screenshot-slide" data-slide="5">
     <h2>Equity Portfolio</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/02_stocks_portfolio.png" alt="Stock Portfolio">
@@ -945,8 +911,8 @@ p {
     <p class="screenshot-caption">Live Alpaca positions with P&L, trailing stops, and one-click order management</p>
 </div>
 
-<!-- Slide 8: Screenshot — AI Signals -->
-<div class="slide screenshot-slide" data-slide="7">
+<!-- Slide 7: Screenshot — AI Signals -->
+<div class="slide screenshot-slide" data-slide="6">
     <h2>AI Signal Generation</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/04_stocks_ai_signals.png" alt="AI Signals">
@@ -954,17 +920,8 @@ p {
     <p class="screenshot-caption">Claude-powered signals with confidence scores, entry/SL/TP levels, and natural-language reasoning</p>
 </div>
 
-<!-- Slide 9: Screenshot — Execution Analytics -->
-<div class="slide screenshot-slide" data-slide="8">
-    <h2>Execution Analytics</h2>
-    <div class="screenshot-wrapper">
-        <img src="screenshots/06_orders_execution.png" alt="Execution Analytics">
-    </div>
-    <p class="screenshot-caption">TCA dashboard: slippage tracking, maker fill %, execution quality diagnostics, order lifecycle funnel</p>
-</div>
-
-<!-- Slide 10: PnL Joke -->
-<div class="slide" data-slide="9">
+<!-- Slide 8: PnL Joke — comic break -->
+<div class="slide" data-slide="7">
     <h1 style="font-size: clamp(24px, 3.5vw, 44px); text-align: center;">
         I promise<br>
         <span class="highlight-purple">my</span> purple lines and <span class="highlight-purple">yours</span><br>
@@ -972,8 +929,8 @@ p {
     </h1>
 </div>
 
-<!-- Slide 11: Screenshot — PnL & Performance -->
-<div class="slide screenshot-slide" data-slide="10">
+<!-- Slide 9: Screenshot — PnL & Performance (joke payoff) -->
+<div class="slide screenshot-slide" data-slide="8">
     <h2>PnL &amp; Performance</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/08_pnl_performance.png" alt="PnL Performance">
@@ -981,8 +938,17 @@ p {
     <p class="screenshot-caption">Equity curve, Sharpe/Sortino/VaR, PnL decomposition, analyst scoreboard, daily heatmap</p>
 </div>
 
-<!-- Slide 12: Screenshot — AI Analysis Report -->
-<div class="slide screenshot-slide" data-slide="11">
+<!-- Slide 10: Screenshot — Execution Analytics -->
+<div class="slide screenshot-slide" data-slide="9">
+    <h2>Execution Analytics</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/06_orders_execution.png" alt="Execution Analytics">
+    </div>
+    <p class="screenshot-caption">TCA dashboard: slippage tracking, maker fill %, execution quality diagnostics, order lifecycle funnel</p>
+</div>
+
+<!-- Slide 11: Screenshot — AI Analysis Report -->
+<div class="slide screenshot-slide" data-slide="10">
     <h2>AI Execution Analysis</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/10_analysis_ai.png" alt="AI Analysis Report">
@@ -990,26 +956,8 @@ p {
     <p class="screenshot-caption">Claude-powered 7-day comprehensive report: latency, slippage, analyst quality, fee efficiency — score 72/100</p>
 </div>
 
-<!-- Slide 13: Screenshot — Research -->
-<div class="slide screenshot-slide" data-slide="12">
-    <h2>AI Research</h2>
-    <div class="screenshot-wrapper">
-        <img src="screenshots/11_research.png" alt="Research">
-    </div>
-    <p class="screenshot-caption">Multi-source sentiment scoring with AI-powered research chat</p>
-</div>
-
-<!-- Slide 14: Screenshot — System Monitoring -->
-<div class="slide screenshot-slide" data-slide="13">
-    <h2>System Health</h2>
-    <div class="screenshot-wrapper">
-        <img src="screenshots/13_system_monitoring.png" alt="System Monitoring">
-    </div>
-    <p class="screenshot-caption">State consistency, latency tracking, reliability trends</p>
-</div>
-
-<!-- Slide 15: 3AM Timeline -->
-<div class="slide" data-slide="14">
+<!-- Slide 12: 3AM Timeline — transitions to "how is this possible?" -->
+<div class="slide" data-slide="11">
     <h2>What Happens While You Sleep</h2>
     <div class="timeline-3am">
         <div class="timeline-event">
@@ -1046,8 +994,17 @@ p {
     <div class="timeline-punchline">Vertex doesn't need coffee. Or sleep. Or a raise.</div>
 </div>
 
-<!-- Slide 16: Org Chart -->
-<div class="slide" data-slide="15">
+<!-- Slide 13: Screenshot — System Monitoring (proves 3AM reliability) -->
+<div class="slide screenshot-slide" data-slide="12">
+    <h2>System Health</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/13_system_monitoring.png" alt="System Monitoring">
+    </div>
+    <p class="screenshot-caption">State consistency, latency tracking, reliability trends</p>
+</div>
+
+<!-- Slide 14: Org Chart — "who built this?" -->
+<div class="slide" data-slide="13">
     <h2>The Team Behind Vertex</h2>
     <div class="org-vs">
         <div class="org-column">
@@ -1076,8 +1033,8 @@ p {
     <div class="org-caption">Same output. 10x less meetings.</div>
 </div>
 
-<!-- Slide 17: Claude as the Full Team -->
-<div class="slide" data-slide="16">
+<!-- Slide 15: Claude as the Full Team — the reveal -->
+<div class="slide" data-slide="14">
     <h2>Claude Code = Full Engineering Team</h2>
     <div class="roles-grid">
         <div class="role-card">
@@ -1090,7 +1047,7 @@ p {
         </div>
         <div class="role-card">
             <div class="role-title highlight-yellow">QA Engineer</div>
-            <div class="role-desc">2,402 tests covering race conditions, crashes, edge cases</div>
+            <div class="role-desc">2,402 tests including Playwright E2E dashboard testing, race conditions, crash recovery</div>
         </div>
         <div class="role-card">
             <div class="role-title highlight-purple">DevOps</div>
@@ -1110,8 +1067,8 @@ p {
     </p>
 </div>
 
-<!-- Slide 18: The Secret Weapon -->
-<div class="slide" data-slide="17">
+<!-- Slide 16: The Secret Weapon -->
+<div class="slide" data-slide="15">
     <h2>The Secret Weapon: CLAUDE.md</h2>
     <p style="text-align: center; margin-bottom: 16px;">
         A single file loaded every session. It never forgets the rules.
@@ -1135,39 +1092,42 @@ p {
     </p>
 </div>
 
-<!-- Slide 19: Tech Stack -->
-<div class="slide" data-slide="18">
-    <h2>Tech Stack</h2>
-    <div style="width: 100%; max-width: 700px;">
-        <div class="tech-row">
-            <div class="tech-name highlight">uvloop</div>
-            <div class="tech-why">C-based event loop &mdash; 2-4x throughput over stdlib asyncio</div>
+<!-- Slide 17: By the Numbers — now the stats land emotionally -->
+<div class="slide" data-slide="16">
+    <h2>By the Numbers</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value highlight">113K</div>
+            <div class="stat-label">Lines of Python</div>
         </div>
-        <div class="tech-row">
-            <div class="tech-name highlight-blue">msgspec</div>
-            <div class="tech-why">Zero-copy serialization with strict typing</div>
+        <div class="stat-card">
+            <div class="stat-value highlight-blue">2,402</div>
+            <div class="stat-label">Test Cases</div>
         </div>
-        <div class="tech-row">
-            <div class="tech-name highlight-yellow">Raw WebSocket</div>
-            <div class="tech-why">No SDK abstraction &mdash; full Discord gateway protocol control</div>
+        <div class="stat-card">
+            <div class="stat-value highlight-yellow">450</div>
+            <div class="stat-label">Commits</div>
         </div>
-        <div class="tech-row">
-            <div class="tech-name highlight-purple">ccxt async</div>
-            <div class="tech-why">Bybit V5 unified API with async execution</div>
+        <div class="stat-card">
+            <div class="stat-value highlight-purple">210</div>
+            <div class="stat-label">Source Modules</div>
         </div>
-        <div class="tech-row">
-            <div class="tech-name highlight-orange">SQLite</div>
-            <div class="tech-why">Zero-config persistence for state, analytics, and TCA</div>
+        <div class="stat-card">
+            <div class="stat-value highlight-orange">37</div>
+            <div class="stat-label">Days to Build</div>
         </div>
-        <div class="tech-row">
-            <div class="tech-name highlight-red">structlog</div>
-            <div class="tech-why">Structured logging with key-value context for prod debugging</div>
+        <div class="stat-card">
+            <div class="stat-value highlight-red">17</div>
+            <div class="stat-label">Packages</div>
         </div>
     </div>
+    <p style="margin-top: 24px; text-align: center; font-size: 14px;">
+        56K source + 57K tests &mdash; <span class="highlight">1:1 test-to-source ratio</span>
+    </p>
 </div>
 
-<!-- Slide 20: Closing -->
-<div class="slide" data-slide="19">
+<!-- Slide 18: Closing -->
+<div class="slide" data-slide="17">
     <div class="logo" style="font-size: clamp(40px, 6vw, 72px); margin-bottom: 8px;">
         <span class="v">V</span>ertex
     </div>
@@ -1203,7 +1163,7 @@ p {
 
 <!-- Navigation -->
 <div class="nav-bar">
-    <div class="slide-counter"><span id="current">1</span>/<span id="total">20</span></div>
+    <div class="slide-counter"><span id="current">1</span>/<span id="total">18</span></div>
     <div class="nav-dots" id="dots"></div>
 </div>
 
