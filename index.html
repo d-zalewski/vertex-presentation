@@ -446,6 +446,175 @@ p {
     margin: 24px 0;
 }
 
+/* Speed Comparison */
+.speed-track {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 16px;
+}
+
+.speed-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.speed-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text-secondary);
+    min-width: 260px;
+    text-align: right;
+}
+
+.speed-bar-track {
+    flex: 1;
+    height: 36px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.speed-bar {
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bg-primary);
+    transition: width 0.8s ease;
+}
+
+.speed-punchline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(14px, 1.6vw, 20px);
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 32px;
+    font-style: italic;
+}
+
+/* Org Chart */
+.org-vs {
+    display: flex;
+    align-items: stretch;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 16px;
+}
+
+.org-column {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+}
+
+.org-column h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.org-people {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 2.2;
+}
+
+.org-total {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.org-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(14px, 1.6vw, 20px);
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 32px;
+    font-style: italic;
+}
+
+/* 3AM Timeline */
+.timeline-3am {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 16px;
+    position: relative;
+}
+
+.timeline-3am::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: var(--border-color);
+}
+
+.timeline-event {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 0;
+    position: relative;
+}
+
+.timeline-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    min-width: 112px;
+    text-align: right;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    flex-shrink: 0;
+    z-index: 1;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+.timeline-dot.sleep { background: var(--accent-blue); box-shadow: 0 0 8px rgba(68, 136, 255, 0.4); }
+.timeline-dot.profit { background: var(--accent-yellow); box-shadow: 0 0 8px rgba(255, 204, 0, 0.4); }
+
+.timeline-text {
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+.timeline-punchline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(14px, 1.6vw, 20px);
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 36px;
+    font-style: italic;
+}
+
 /* Screenshot Slides */
 .screenshot-slide {
     gap: 12px;
@@ -515,6 +684,27 @@ p {
     .tech-row { max-width: 1100px; padding: 18px 0; gap: 24px; }
     .tech-name { font-size: 22px; min-width: 240px; }
     .tech-why { font-size: 20px; }
+
+    .speed-track { max-width: 1400px; gap: 24px; }
+    .speed-label { font-size: 20px; min-width: 400px; }
+    .speed-bar-track { height: 52px; border-radius: 12px; }
+    .speed-bar { font-size: 19px; padding-right: 18px; }
+    .speed-punchline { font-size: clamp(18px, 1.6vw, 28px); margin-top: 48px; }
+
+    .org-vs { max-width: 1500px; gap: 60px; }
+    .org-column { padding: 48px; border-radius: 16px; }
+    .org-column h3 { font-size: 24px; margin-bottom: 28px; }
+    .org-people { font-size: 19px; line-height: 2.4; }
+    .org-total { font-size: clamp(36px, 3vw, 60px); margin-top: 28px; }
+    .org-caption { font-size: clamp(18px, 1.6vw, 28px); margin-top: 48px; }
+
+    .timeline-3am { max-width: 1100px; }
+    .timeline-3am::before { left: 180px; }
+    .timeline-event { gap: 28px; padding: 20px 0; }
+    .timeline-time { font-size: 22px; min-width: 170px; }
+    .timeline-dot { width: 16px; height: 16px; }
+    .timeline-text { font-size: 22px; }
+    .timeline-punchline { font-size: clamp(18px, 1.6vw, 28px); margin-top: 52px; }
 
     .screenshot-slide { gap: 18px; }
     .screenshot-wrapper { max-width: 1800px; }
@@ -642,8 +832,40 @@ p {
     </p>
 </div>
 
-<!-- Slide 4: Key Features -->
+<!-- Slide 4: Speed Comparison -->
 <div class="slide" data-slide="3">
+    <h2>How Fast Is Fast?</h2>
+    <div class="speed-track">
+        <div class="speed-row">
+            <div class="speed-label">You open TradingView</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 100%; background: var(--accent-red);">3,000 ms</div>
+            </div>
+        </div>
+        <div class="speed-row">
+            <div class="speed-label">You find the pair</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 85%; background: var(--accent-orange);">2,500 ms</div>
+            </div>
+        </div>
+        <div class="speed-row">
+            <div class="speed-label">You click Market Buy</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 27%; background: var(--accent-yellow);">800 ms</div>
+            </div>
+        </div>
+        <div class="speed-row">
+            <div class="speed-label">Vertex: signal &rarr; order filled</div>
+            <div class="speed-bar-track">
+                <div class="speed-bar" style="width: 1.7%; background: var(--accent-green); min-width: 70px;">50 ms</div>
+            </div>
+        </div>
+    </div>
+    <div class="speed-punchline">You blinked. Vertex already took profit.</div>
+</div>
+
+<!-- Slide 5: Key Features -->
+<div class="slide" data-slide="4">
     <h2>Feature Highlights</h2>
     <div class="features-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="feature-card">
@@ -703,8 +925,8 @@ p {
     </div>
 </div>
 
-<!-- Slide 5: Screenshot — Overview Dashboard -->
-<div class="slide screenshot-slide" data-slide="4">
+<!-- Slide 6: Screenshot — Overview Dashboard -->
+<div class="slide screenshot-slide" data-slide="5">
     <h2>Live Dashboard</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/01_overview_dashboard.png" alt="Overview Dashboard">
@@ -712,8 +934,8 @@ p {
     <p class="screenshot-caption">Real-time connectivity, risk radar, exposure tracking, and data freshness at a glance</p>
 </div>
 
-<!-- Slide 6: Screenshot — Stock Portfolio -->
-<div class="slide screenshot-slide" data-slide="5">
+<!-- Slide 7: Screenshot — Stock Portfolio -->
+<div class="slide screenshot-slide" data-slide="6">
     <h2>Equity Portfolio</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/02_stocks_portfolio.png" alt="Stock Portfolio">
@@ -721,8 +943,8 @@ p {
     <p class="screenshot-caption">Live Alpaca positions with P&L, trailing stops, and one-click order management</p>
 </div>
 
-<!-- Slide 7: Screenshot — AI Signals -->
-<div class="slide screenshot-slide" data-slide="6">
+<!-- Slide 8: Screenshot — AI Signals -->
+<div class="slide screenshot-slide" data-slide="7">
     <h2>AI Signal Generation</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/04_stocks_ai_signals.png" alt="AI Signals">
@@ -730,8 +952,8 @@ p {
     <p class="screenshot-caption">Claude-powered signals with confidence scores, entry/SL/TP levels, and natural-language reasoning</p>
 </div>
 
-<!-- Slide 8: Screenshot — Execution Analytics -->
-<div class="slide screenshot-slide" data-slide="7">
+<!-- Slide 9: Screenshot — Execution Analytics -->
+<div class="slide screenshot-slide" data-slide="8">
     <h2>Execution Analytics</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/06_orders_execution.png" alt="Execution Analytics">
@@ -739,8 +961,8 @@ p {
     <p class="screenshot-caption">TCA dashboard: slippage tracking, maker fill %, execution quality diagnostics, order lifecycle funnel</p>
 </div>
 
-<!-- Slide 9: PnL Joke -->
-<div class="slide" data-slide="8">
+<!-- Slide 10: PnL Joke -->
+<div class="slide" data-slide="9">
     <h1 style="font-size: clamp(24px, 3.5vw, 44px); text-align: center;">
         I promise<br>
         <span class="highlight-purple">my</span> and <span class="highlight-purple">yours</span> purple lines<br>
@@ -748,8 +970,8 @@ p {
     </h1>
 </div>
 
-<!-- Slide 10: Screenshot — PnL & Performance -->
-<div class="slide screenshot-slide" data-slide="9">
+<!-- Slide 11: Screenshot — PnL & Performance -->
+<div class="slide screenshot-slide" data-slide="10">
     <h2>PnL &amp; Performance</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/08_pnl_performance.png" alt="PnL Performance">
@@ -757,8 +979,8 @@ p {
     <p class="screenshot-caption">Equity curve, Sharpe/Sortino/VaR, PnL decomposition, analyst scoreboard, daily heatmap</p>
 </div>
 
-<!-- Slide 11: Screenshot — AI Analysis Report -->
-<div class="slide screenshot-slide" data-slide="10">
+<!-- Slide 12: Screenshot — AI Analysis Report -->
+<div class="slide screenshot-slide" data-slide="11">
     <h2>AI Execution Analysis</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/10_analysis_ai.png" alt="AI Analysis Report">
@@ -766,8 +988,8 @@ p {
     <p class="screenshot-caption">Claude-powered 7-day comprehensive report: latency, slippage, analyst quality, fee efficiency — score 72/100</p>
 </div>
 
-<!-- Slide 12: Screenshot — Research -->
-<div class="slide screenshot-slide" data-slide="11">
+<!-- Slide 13: Screenshot — Research -->
+<div class="slide screenshot-slide" data-slide="12">
     <h2>AI Research</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/11_research.png" alt="Research">
@@ -775,8 +997,8 @@ p {
     <p class="screenshot-caption">Multi-source sentiment scoring with AI-powered research chat</p>
 </div>
 
-<!-- Slide 13: Screenshot — System Monitoring -->
-<div class="slide screenshot-slide" data-slide="12">
+<!-- Slide 14: Screenshot — System Monitoring -->
+<div class="slide screenshot-slide" data-slide="13">
     <h2>System Health</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/13_system_monitoring.png" alt="System Monitoring">
@@ -784,8 +1006,76 @@ p {
     <p class="screenshot-caption">State consistency, latency tracking, reliability trends</p>
 </div>
 
-<!-- Slide 14: Claude as the Full Team -->
-<div class="slide" data-slide="13">
+<!-- Slide 15: 3AM Timeline -->
+<div class="slide" data-slide="14">
+    <h2>What Happens While You Sleep</h2>
+    <div class="timeline-3am">
+        <div class="timeline-event">
+            <div class="timeline-time highlight">3:00:00 AM</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Discord signal detected — <span class="highlight">ETHUSDT LONG</span></div>
+        </div>
+        <div class="timeline-event">
+            <div class="timeline-time highlight">3:00:00.05</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">3-tranche ladder placed, risk checked, sized to portfolio</div>
+        </div>
+        <div class="timeline-event">
+            <div class="timeline-time highlight">3:00:02 AM</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Stop loss set, breakeven logic armed, Telegram alert sent</div>
+        </div>
+        <div class="timeline-event">
+            <div class="timeline-time highlight-blue">3:00:02 AM</div>
+            <div class="timeline-dot sleep"></div>
+            <div class="timeline-text" style="font-style: italic; color: var(--text-muted);">You are asleep. Peacefully.</div>
+        </div>
+        <div class="timeline-event">
+            <div class="timeline-time highlight-blue">5:14 AM</div>
+            <div class="timeline-dot sleep"></div>
+            <div class="timeline-text">TP1 hit — partial close, stop moved to breakeven</div>
+        </div>
+        <div class="timeline-event">
+            <div class="timeline-time highlight-yellow">7:00 AM</div>
+            <div class="timeline-dot profit"></div>
+            <div class="timeline-text">You wake up, check phone: <span class="highlight" style="font-weight: 700;">+2.3%</span></div>
+        </div>
+    </div>
+    <div class="timeline-punchline">The bot doesn't need coffee. Or sleep. Or a raise.</div>
+</div>
+
+<!-- Slide 16: Org Chart -->
+<div class="slide" data-slide="15">
+    <h2>The Team Behind Vertex</h2>
+    <div class="org-vs">
+        <div class="org-column">
+            <h3 class="highlight-red">Typical Quant Fund</h3>
+            <div class="org-people">
+                CEO / CTO<br>
+                5 Backend Developers<br>
+                3 Quant Researchers<br>
+                2 SRE / DevOps<br>
+                1 Product Manager<br>
+                1 Frontend Developer<br>
+                1 QA Engineer<br>
+                1 Compliance Officer
+            </div>
+            <div class="org-total highlight-red">15 people</div>
+        </div>
+        <div class="org-column" style="border-color: var(--accent-green);">
+            <h3 class="highlight">Vertex</h3>
+            <div class="org-people">
+                1 Human (PM)<br>
+                <span style="color: var(--accent-green);">+ Claude Code</span>
+            </div>
+            <div class="org-total highlight" style="margin-top: 80px;">1.5 people</div>
+        </div>
+    </div>
+    <div class="org-caption">Same output. 10x less meetings.</div>
+</div>
+
+<!-- Slide 17: Claude as the Full Team -->
+<div class="slide" data-slide="16">
     <h2>Claude Code = Full Engineering Team</h2>
     <div class="roles-grid">
         <div class="role-card">
@@ -818,8 +1108,8 @@ p {
     </p>
 </div>
 
-<!-- Slide 15: The Secret Weapon -->
-<div class="slide" data-slide="14">
+<!-- Slide 18: The Secret Weapon -->
+<div class="slide" data-slide="17">
     <h2>The Secret Weapon: CLAUDE.md</h2>
     <p style="text-align: center; margin-bottom: 16px;">
         A single file loaded every session. It never forgets the rules.
@@ -843,8 +1133,8 @@ p {
     </p>
 </div>
 
-<!-- Slide 16: Tech Stack -->
-<div class="slide" data-slide="15">
+<!-- Slide 19: Tech Stack -->
+<div class="slide" data-slide="18">
     <h2>Tech Stack</h2>
     <div style="width: 100%; max-width: 700px;">
         <div class="tech-row">
@@ -874,8 +1164,8 @@ p {
     </div>
 </div>
 
-<!-- Slide 17: Closing -->
-<div class="slide" data-slide="16">
+<!-- Slide 20: Closing -->
+<div class="slide" data-slide="19">
     <div class="logo" style="font-size: clamp(40px, 6vw, 72px); margin-bottom: 8px;">
         <span class="v">V</span>ertex
     </div>
@@ -911,7 +1201,7 @@ p {
 
 <!-- Navigation -->
 <div class="nav-bar">
-    <div class="slide-counter"><span id="current">1</span>/<span id="total">17</span></div>
+    <div class="slide-counter"><span id="current">1</span>/<span id="total">20</span></div>
     <div class="nav-dots" id="dots"></div>
 </div>
 
