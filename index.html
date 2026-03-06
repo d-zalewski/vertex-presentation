@@ -475,7 +475,66 @@ p {
     margin-top: 8px;
 }
 
-/* Responsive */
+/* 4K / Large displays (2560px+) */
+@media (min-width: 2560px) {
+    .slide { padding: 100px 160px; }
+
+    h1 { font-size: clamp(40px, 4vw, 72px); margin-bottom: 36px; }
+    h2 { font-size: clamp(22px, 2vw, 36px); margin-bottom: 48px; letter-spacing: 3px; }
+    p  { font-size: clamp(18px, 1.5vw, 28px); max-width: 1200px; line-height: 1.8; }
+
+    .title-slide .logo { font-size: clamp(80px, 8vw, 140px); margin-bottom: 24px; }
+    .title-slide .tagline { font-size: clamp(18px, 1.8vw, 32px); margin-bottom: 64px; }
+    .title-slide .built-by { padding: 18px 36px; font-size: clamp(16px, 1.4vw, 24px); border-radius: 12px; }
+    .title-slide .built-by .pulse { width: 12px; height: 12px; }
+
+    .stats-grid { max-width: 1400px; gap: 32px; }
+    .stat-card { padding: 40px 32px; border-radius: 16px; }
+    .stat-value { font-size: clamp(36px, 3.5vw, 64px); margin-bottom: 12px; }
+    .stat-label { font-size: 18px; letter-spacing: 2px; }
+
+    .arch-flow { max-width: 1600px; }
+    .arch-stage { padding: 36px 24px; border-radius: 16px; }
+    .arch-stage-label { font-size: 16px; letter-spacing: 3px; margin-bottom: 16px; }
+    .arch-stage-items { font-size: 17px; line-height: 2; }
+    .arch-arrow { font-size: 30px; padding: 0 14px; }
+
+    .features-grid { max-width: 1500px; gap: 24px; }
+    .feature-card { padding: 36px; border-radius: 16px; }
+    .feature-card h3 { font-size: 22px; margin-bottom: 14px; gap: 12px; }
+    .feature-card ul { font-size: 18px; line-height: 2; }
+
+    .roles-grid { max-width: 1500px; gap: 24px; }
+    .role-card { padding: 32px; border-radius: 16px; }
+    .role-card .role-title { font-size: 20px; margin-bottom: 12px; }
+    .role-card .role-desc { font-size: 17px; line-height: 1.7; }
+
+    .claudemd-block { max-width: 1200px; padding: 48px; border-radius: 16px; font-size: 19px; line-height: 2.2; }
+    .claudemd-block .line-no { font-size: 16px; min-width: 36px; }
+
+    .tech-row { max-width: 1100px; padding: 18px 0; gap: 24px; }
+    .tech-name { font-size: 22px; min-width: 240px; }
+    .tech-why { font-size: 20px; }
+
+    .screenshot-slide { gap: 18px; }
+    .screenshot-wrapper { max-width: 1800px; }
+    .screenshot-wrapper img { border-radius: 16px; }
+    .screenshot-caption { font-size: 18px; margin-top: 14px; }
+
+    .final-stats { gap: 52px; margin-top: 36px; margin-bottom: 48px; }
+    .final-stat .val { font-size: clamp(32px, 3vw, 56px); }
+    .final-stat .lbl { font-size: 17px; letter-spacing: 2px; }
+    .final-badge { font-size: clamp(18px, 1.6vw, 28px); padding: 24px 48px; border-radius: 16px; }
+
+    .divider { width: 90px; height: 3px; margin: 36px 0; }
+
+    .nav-bar { bottom: 36px; gap: 18px; padding: 14px 28px; border-radius: 16px; }
+    .nav-dot { width: 12px; height: 12px; }
+    .nav-dots { gap: 10px; }
+    .slide-counter { font-size: 18px; min-width: 60px; }
+}
+
+/* Responsive small */
 @media (max-width: 768px) {
     .slide { padding: 40px 24px; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
