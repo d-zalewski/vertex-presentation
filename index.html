@@ -149,6 +149,41 @@ p {
 .highlight-purple { color: var(--accent-purple); }
 .highlight-orange { color: var(--accent-orange); }
 
+/* Boot Sequence */
+.boot-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-primary);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 15%;
+    transition: opacity 0.6s ease;
+}
+.boot-overlay.fade-out { opacity: 0; pointer-events: none; }
+.boot-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(13px, 1.4vw, 18px);
+    color: var(--text-muted);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    line-height: 2.2;
+}
+.boot-line.visible { opacity: 1; transform: translateY(0); }
+.boot-line .ok { color: var(--accent-green); font-weight: 700; }
+.boot-line .fail { color: var(--accent-red); font-weight: 700; }
+.boot-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.1em;
+    background: var(--accent-green);
+    vertical-align: text-bottom;
+    animation: blink-cursor 0.8s step-end infinite;
+}
+@keyframes blink-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
 /* Title Slide */
 .title-slide .logo {
     font-size: clamp(56px, 8vw, 96px);
@@ -816,6 +851,16 @@ p {
 <div class="deck">
 
 <!-- Slide 1: Title -->
+<!-- Boot Sequence Overlay -->
+<div class="boot-overlay" id="boot-overlay">
+    <div class="boot-line" data-delay="300">[<span class="ok">OK</span>] Connecting to exchanges...</div>
+    <div class="boot-line" data-delay="700">[<span class="ok">OK</span>] Signal feeds authenticated</div>
+    <div class="boot-line" data-delay="1100">[<span class="ok">OK</span>] Risk engine initialized</div>
+    <div class="boot-line" data-delay="1500">[<span class="ok">OK</span>] Dashboard online</div>
+    <div class="boot-line" data-delay="1900">[<span class="ok">OK</span>] Self-healing reconciler armed</div>
+    <div class="boot-line" data-delay="2400"><span style="color: var(--accent-green);">&gt; vertex ready</span><span class="boot-cursor"></span></div>
+</div>
+
 <div class="slide title-slide active" data-slide="0">
     <div class="logo"><span class="v">V</span>ertex</div>
     <div class="tagline">Trading, Execution, Risk & Research Engine</div>
@@ -1379,6 +1424,20 @@ document.addEventListener('touchend', (e) => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
 });
+
+// Boot sequence
+(function() {
+    const overlay = document.getElementById('boot-overlay');
+    if (!overlay) return;
+    const lines = overlay.querySelectorAll('.boot-line');
+    lines.forEach(line => {
+        const delay = parseInt(line.dataset.delay, 10);
+        setTimeout(() => line.classList.add('visible'), delay);
+    });
+    // Fade out overlay after last line + pause
+    setTimeout(() => overlay.classList.add('fade-out'), 3400);
+    setTimeout(() => overlay.remove(), 4000);
+})();
 </script>
 </body>
 </html>
