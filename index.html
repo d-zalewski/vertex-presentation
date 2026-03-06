@@ -647,6 +647,70 @@ p {
     margin-top: 8px;
 }
 
+/* Failure Scenarios */
+.failure-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 16px;
+}
+
+.failure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.failure-scenario {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-red);
+}
+
+.failure-response {
+    font-size: 13px;
+    color: var(--accent-green);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.failure-punchline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(14px, 1.6vw, 20px);
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 32px;
+    font-style: italic;
+}
+
+/* Day in the Life */
+.daylife-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 6px 0;
+}
+
+.daylife-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 70px;
+    color: var(--text-muted);
+}
+
+.daylife-event {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
 /* 4K / Large displays (2560px+) */
 @media (min-width: 2560px) {
     .slide { padding: 100px 160px; }
@@ -708,6 +772,16 @@ p {
     .timeline-dot { width: 16px; height: 16px; }
     .timeline-text { font-size: 22px; }
     .timeline-punchline { font-size: clamp(18px, 1.6vw, 28px); margin-top: 52px; }
+
+    .failure-grid { max-width: 1400px; gap: 24px; }
+    .failure-card { padding: 36px; border-radius: 16px; }
+    .failure-scenario { font-size: 20px; }
+    .failure-response { font-size: 18px; }
+    .failure-punchline { font-size: clamp(18px, 1.6vw, 28px); margin-top: 48px; }
+
+    .daylife-row { gap: 18px; padding: 8px 0; }
+    .daylife-time { font-size: 19px; min-width: 110px; }
+    .daylife-event { font-size: 19px; }
 
     .screenshot-slide { gap: 10px; padding: 24px 60px 50px; }
     .screenshot-wrapper img { border-radius: 16px; max-height: 70vh; }
@@ -994,8 +1068,39 @@ p {
     <div class="timeline-punchline">Vertex doesn't need coffee. Or sleep. Or a raise.</div>
 </div>
 
-<!-- Slide 13: Screenshot — System Monitoring (proves 3AM reliability) -->
-<div class="slide screenshot-slide" data-slide="12">
+<!-- Slide 13: Day in the Life — pairs with 3AM -->
+<div class="slide" data-slide="12">
+    <h2>A Day in the Life</h2>
+    <div class="org-vs">
+        <div class="org-column">
+            <h3 class="highlight-red">Manual Trader</h3>
+            <div class="org-people" style="text-align: left;">
+                <div class="daylife-row"><span class="daylife-time">5:30 AM</span><span class="daylife-event">Alarm. Check charts. Panic.</span></div>
+                <div class="daylife-row"><span class="daylife-time">6:15 AM</span><span class="daylife-event">Missed entry by 3 minutes</span></div>
+                <div class="daylife-row"><span class="daylife-time">9:00 AM</span><span class="daylife-event">FOMO buy at resistance</span></div>
+                <div class="daylife-row"><span class="daylife-time">11:30 AM</span><span class="daylife-event">Stare at chart. Move SL. Regret.</span></div>
+                <div class="daylife-row"><span class="daylife-time">2:00 PM</span><span class="daylife-event">Fat-finger a market sell</span></div>
+                <div class="daylife-row"><span class="daylife-time">6:00 PM</span><span class="daylife-event">Check phone for the 47th time</span></div>
+                <div class="daylife-row"><span class="daylife-time">11:00 PM</span><span class="daylife-event">Can't sleep. What if it dumps?</span></div>
+            </div>
+        </div>
+        <div class="org-column" style="border-color: var(--accent-green);">
+            <h3 class="highlight">Vertex PM</h3>
+            <div class="org-people" style="text-align: left;">
+                <div class="daylife-row"><span class="daylife-time">8:00 AM</span><span class="daylife-event">Wake up. Check Telegram. +1.8%.</span></div>
+                <div class="daylife-row"><span class="daylife-time">8:05 AM</span><span class="daylife-event">Coffee.</span></div>
+                <div class="daylife-row"><span class="daylife-time">9:00 AM</span><span class="daylife-event">Go to work</span></div>
+                <div class="daylife-row"><span class="daylife-time">12:00 PM</span><span class="daylife-event">Lunch. Another alert: TP2 hit.</span></div>
+                <div class="daylife-row"><span class="daylife-time">5:00 PM</span><span class="daylife-event">Home. Dashboard looks green.</span></div>
+                <div class="daylife-row"><span class="daylife-time">10:00 PM</span><span class="daylife-event">Sleep. Vertex doesn't.</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="org-caption">Same market. Different experience.</div>
+</div>
+
+<!-- Slide 14: Screenshot — System Monitoring (proves 3AM reliability) -->
+<div class="slide screenshot-slide" data-slide="13">
     <h2>System Health</h2>
     <div class="screenshot-wrapper">
         <img src="screenshots/13_system_monitoring.png" alt="System Monitoring">
@@ -1003,8 +1108,65 @@ p {
     <p class="screenshot-caption">State consistency, latency tracking, reliability trends</p>
 </div>
 
-<!-- Slide 14: Org Chart — "who built this?" -->
-<div class="slide" data-slide="13">
+<!-- Slide 16: What Could Go Wrong — failure scenarios -->
+<div class="slide" data-slide="14">
+    <h2>What Could Go Wrong?</h2>
+    <div class="failure-grid">
+        <div class="failure-card">
+            <div class="failure-scenario">Exchange API goes down</div>
+            <div class="failure-response">> Circuit breaker activates, queues retry, alerts sent</div>
+        </div>
+        <div class="failure-card">
+            <div class="failure-scenario">Bot crashes mid-trade</div>
+            <div class="failure-response">> Startup sync reconciles all positions from exchange state</div>
+        </div>
+        <div class="failure-card">
+            <div class="failure-scenario">Position state desyncs</div>
+            <div class="failure-response">> Self-healing reconciler detects and auto-fixes mismatches</div>
+        </div>
+        <div class="failure-card">
+            <div class="failure-scenario">Stop loss order rejected</div>
+            <div class="failure-response">> Autofix engine retries with corrected parameters</div>
+        </div>
+        <div class="failure-card">
+            <div class="failure-scenario">Price gaps through stop loss</div>
+            <div class="failure-response">> Emergency market close with slippage protection</div>
+        </div>
+        <div class="failure-card">
+            <div class="failure-scenario">Daily loss limit breached</div>
+            <div class="failure-response">> Trading halted automatically, all positions protected</div>
+        </div>
+    </div>
+    <div class="failure-punchline">All of these happened. Vertex fixed itself.</div>
+</div>
+
+<!-- Slide 17: Hedge Fund Grade — credibility -->
+<div class="slide" data-slide="15">
+    <h2>Battle-Tested</h2>
+    <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 800px;">
+        <div class="stat-card">
+            <div class="stat-value highlight-yellow">3</div>
+            <div class="stat-label">Audit Rounds</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value highlight">110</div>
+            <div class="stat-label">Findings Fixed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value highlight-blue">23</div>
+            <div class="stat-label">Regression Tests Added</div>
+        </div>
+    </div>
+    <p style="margin-top: 32px; text-align: center; font-size: 15px;">
+        Hedge fund-grade security audit. <span class="highlight">Every finding fixed. Every fix tested.</span>
+    </p>
+    <p style="margin-top: 12px; text-align: center; font-size: 13px; color: var(--text-muted);">
+        Production code. Not a prototype.
+    </p>
+</div>
+
+<!-- Slide 18: Org Chart — "who built this?" -->
+<div class="slide" data-slide="16">
     <h2>The Team Behind Vertex</h2>
     <div class="org-vs">
         <div class="org-column">
@@ -1033,8 +1195,8 @@ p {
     <div class="org-caption">Same output. 10x less meetings.</div>
 </div>
 
-<!-- Slide 15: Claude as the Full Team — the reveal -->
-<div class="slide" data-slide="14">
+<!-- Slide 19: Claude as the Full Team — the reveal -->
+<div class="slide" data-slide="17">
     <h2>Claude Code = Full Engineering Team</h2>
     <div class="roles-grid">
         <div class="role-card">
@@ -1067,8 +1229,8 @@ p {
     </p>
 </div>
 
-<!-- Slide 16: The Secret Weapon -->
-<div class="slide" data-slide="15">
+<!-- Slide 20: The Secret Weapon -->
+<div class="slide" data-slide="18">
     <h2>The Secret Weapon: CLAUDE.md</h2>
     <p style="text-align: center; margin-bottom: 16px;">
         A single file loaded every session. It never forgets the rules.
@@ -1092,8 +1254,8 @@ p {
     </p>
 </div>
 
-<!-- Slide 17: By the Numbers — now the stats land emotionally -->
-<div class="slide" data-slide="16">
+<!-- Slide 21: By the Numbers — now the stats land emotionally -->
+<div class="slide" data-slide="19">
     <h2>By the Numbers</h2>
     <div class="stats-grid">
         <div class="stat-card">
@@ -1126,8 +1288,8 @@ p {
     </p>
 </div>
 
-<!-- Slide 18: Closing -->
-<div class="slide" data-slide="17">
+<!-- Slide 22: Closing -->
+<div class="slide" data-slide="20">
     <div class="logo" style="font-size: clamp(40px, 6vw, 72px); margin-bottom: 8px;">
         <span class="v">V</span>ertex
     </div>
@@ -1163,7 +1325,7 @@ p {
 
 <!-- Navigation -->
 <div class="nav-bar">
-    <div class="slide-counter"><span id="current">1</span>/<span id="total">18</span></div>
+    <div class="slide-counter"><span id="current">1</span>/<span id="total">21</span></div>
     <div class="nav-dots" id="dots"></div>
 </div>
 
