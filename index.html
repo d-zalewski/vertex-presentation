@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex — Built by Claude Code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --bg-tertiary: #1a1a24;
+    --bg-card: #15151f;
+    --border-color: #2a2a3a;
+    --text-primary: #f0f0f5;
+    --text-secondary: #8888a0;
+    --text-muted: #5a5a70;
+    --accent-green: #00ff88;
+    --accent-green-dim: #00cc6a;
+    --accent-red: #ff4466;
+    --accent-yellow: #ffcc00;
+    --accent-blue: #4488ff;
+    --accent-purple: #aa66ff;
+    --accent-orange: #ff8844;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.deck {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    background: var(--bg-primary);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(0, 255, 136, 0.025) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(68, 136, 255, 0.025) 0%, transparent 50%);
+}
+
+.slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Navigation */
+.nav-bar {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 8px 16px;
+}
+
+.nav-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.nav-dot.active {
+    background: var(--accent-green);
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+}
+
+.slide-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Typography */
+.logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.logo .v { color: var(--accent-green); }
+
+h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+}
+
+p {
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 800px;
+}
+
+.highlight { color: var(--accent-green); }
+.highlight-blue { color: var(--accent-blue); }
+.highlight-yellow { color: var(--accent-yellow); }
+.highlight-red { color: var(--accent-red); }
+.highlight-purple { color: var(--accent-purple); }
+.highlight-orange { color: var(--accent-orange); }
+
+/* Title Slide */
+.title-slide .logo {
+    font-size: clamp(56px, 8vw, 96px);
+    margin-bottom: 16px;
+}
+
+.title-slide .tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(14px, 1.8vw, 22px);
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+}
+
+.title-slide .built-by {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 255, 136, 0.08);
+    border: 1px solid rgba(0, 255, 136, 0.25);
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(12px, 1.4vw, 16px);
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.title-slide .built-by .pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 10px var(--accent-green);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 16px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: border-color 0.3s;
+}
+
+.stat-card:hover {
+    border-color: var(--accent-blue);
+}
+
+.stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Architecture Diagram */
+.arch-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 16px;
+}
+
+.arch-stage {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+}
+
+.arch-stage-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.arch-stage-items {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.arch-arrow {
+    font-size: 20px;
+    color: var(--text-muted);
+    padding: 0 8px;
+    flex-shrink: 0;
+}
+
+/* Feature Cards */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 960px;
+    margin-top: 8px;
+}
+
+.feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.feature-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.feature-card ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.feature-card ul li::before {
+    content: ">";
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-green);
+    margin-right: 8px;
+    font-weight: 700;
+}
+
+/* Roles Table */
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 960px;
+    margin-top: 8px;
+}
+
+.role-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.role-card .role-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.role-card .role-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* CLAUDE.md Slide */
+.claudemd-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+    color: var(--text-secondary);
+}
+
+.claudemd-block .line {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.claudemd-block .line-no {
+    color: var(--text-muted);
+    min-width: 24px;
+    text-align: right;
+    user-select: none;
+    font-size: 11px;
+}
+
+.claudemd-block .key { color: var(--accent-blue); }
+.claudemd-block .val { color: var(--accent-green); }
+.claudemd-block .comment { color: var(--text-muted); font-style: italic; }
+
+/* Tech Stack */
+.tech-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 700px;
+}
+
+.tech-row:last-child { border-bottom: none; }
+
+.tech-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    min-width: 160px;
+}
+
+.tech-why {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Final Slide */
+.final-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+}
+
+.final-stat {
+    text-align: center;
+}
+
+.final-stat .val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    display: block;
+}
+
+.final-stat .lbl {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.final-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(14px, 1.6vw, 20px);
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px 32px;
+}
+
+/* Divider */
+.divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+    border-radius: 1px;
+    margin: 24px 0;
+}
+
+/* Screenshot Slides */
+.screenshot-slide {
+    gap: 12px;
+}
+
+.screenshot-slide h2 {
+    margin-bottom: 4px;
+}
+
+.screenshot-wrapper {
+    max-width: 1100px;
+    width: 100%;
+}
+
+.screenshot-wrapper img {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.screenshot-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slide { padding: 40px 24px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-grid { grid-template-columns: 1fr !important; }
+    .roles-grid { grid-template-columns: repeat(2, 1fr); }
+    .arch-flow { flex-direction: column; }
+    .arch-arrow { transform: rotate(90deg); }
+    .final-stats { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- Slide 1: Title -->
+<div class="slide title-slide active" data-slide="0">
+    <div class="logo"><span class="v">V</span>ertex</div>
+    <div class="tagline">Trading, Execution, Risk & Research Engine</div>
+    <div class="built-by">
+        <span class="pulse"></span>
+        100% written by Claude Code
+    </div>
+</div>
+
+<!-- Slide 2: The Numbers -->
+<div class="slide" data-slide="1">
+    <h2>By the Numbers</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value highlight">113K</div>
+            <div class="stat-label">Lines of Python</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value highlight-blue">2,402</div>
+            <div class="stat-label">Test Cases</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value highlight-yellow">450</div>
+            <div class="stat-label">Commits</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value highlight-purple">210</div>
+            <div class="stat-label">Source Modules</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value highlight-orange">37</div>
+            <div class="stat-label">Days to Build</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value highlight-red">17</div>
+            <div class="stat-label">Packages</div>
+        </div>
+    </div>
+    <p style="margin-top: 24px; text-align: center; font-size: 14px;">
+        56K source + 57K tests &mdash; <span class="highlight">1:1 test-to-source ratio</span>
+    </p>
+</div>
+
+<!-- Slide 3: Architecture -->
+<div class="slide" data-slide="2">
+    <h2>Architecture</h2>
+    <div class="arch-flow">
+        <div class="arch-stage">
+            <div class="arch-stage-label highlight">Ingest</div>
+            <div class="arch-stage-items">
+                Discord WSS<br>
+                TradingView Webhooks<br>
+                API Signal Feed<br>
+                Analyst Validation
+            </div>
+        </div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-stage">
+            <div class="arch-stage-label highlight-blue">Decide</div>
+            <div class="arch-stage-items">
+                Risk Check<br>
+                Deduplication<br>
+                Position Sizing<br>
+                Entry Zone Calc
+            </div>
+        </div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-stage">
+            <div class="arch-stage-label highlight-yellow">Execute</div>
+            <div class="arch-stage-items">
+                Smart Order Routing<br>
+                Efficient Fills<br>
+                Adaptive Placement<br>
+                Fee-Aware Execution
+            </div>
+        </div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-stage">
+            <div class="arch-stage-label highlight-purple">Monitor</div>
+            <div class="arch-stage-items">
+                Live Dashboard<br>
+                Telegram Alerts<br>
+                Circuit Breakers<br>
+                Self-Healing Recon
+            </div>
+        </div>
+    </div>
+    <p style="margin-top: 24px; text-align: center; font-size: 14px;">
+        Fully autonomous lifecycle: <span class="highlight-blue">Entry</span> &rarr; <span class="highlight">Protect</span> &rarr; <span class="highlight-yellow">Scale</span> &rarr; <span class="highlight-purple">Trail</span> &rarr; <span class="highlight-red">Exit</span> &mdash; Crypto & Equities
+    </p>
+</div>
+
+<!-- Slide 4: Key Features -->
+<div class="slide" data-slide="3">
+    <h2>Feature Highlights</h2>
+    <div class="features-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="feature-card">
+            <h3><span class="highlight">></span> Multi-Source Ingestion</h3>
+            <ul>
+                <li>Raw WebSocket Discord gateway</li>
+                <li>TradingView webhook integration</li>
+                <li>API signal feed ingestion</li>
+                <li>Per-analyst signal attribution</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3><span class="highlight-blue">></span> Execution Engine</h3>
+            <ul>
+                <li>3-tranche DCA with asset-aware allocation</li>
+                <li>Capped IOC + PostOnly limit retreat</li>
+                <li>Auto-refreshing ladder at market levels</li>
+                <li>Slippage protection per asset class</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3><span class="highlight-yellow">></span> Risk & Safety</h3>
+            <ul>
+                <li>Fail-closed position size gatekeeper</li>
+                <li>Per-symbol and portfolio-level caps</li>
+                <li>Daily loss limits + max drawdown halt</li>
+                <li>Circuit breakers, crash recovery, self-healing</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3><span class="highlight-purple">></span> AI Research & Analysis</h3>
+            <ul>
+                <li>Claude-powered trade setup generation</li>
+                <li>Multi-source news feed aggregation</li>
+                <li>Sentiment scoring via Finnhub, FMP, CoinGecko</li>
+                <li>AI-generated entry, stop-loss, and TP levels</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3><span class="highlight-orange">></span> Crypto & Equities</h3>
+            <ul>
+                <li>Bybit perpetual futures with leveraged execution</li>
+                <li>Alpaca equities with WebSocket streaming</li>
+                <li>AI signal generation for stock picks</li>
+                <li>Market-hours-aware scheduling</li>
+            </ul>
+        </div>
+        <div class="feature-card">
+            <h3><span class="highlight-blue" style="filter: brightness(1.3);">></span> Order Execution Analytics</h3>
+            <ul>
+                <li>AI-powered TCA (Transaction Cost Analysis)</li>
+                <li>Slippage tracking per asset and order type</li>
+                <li>Fee analysis with maker/taker breakdowns</li>
+                <li>Latency and fill efficiency scoring</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Screenshot — Overview Dashboard -->
+<div class="slide screenshot-slide" data-slide="4">
+    <h2>Live Dashboard</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/01_overview_dashboard.png" alt="Overview Dashboard">
+    </div>
+    <p class="screenshot-caption">Real-time connectivity, risk radar, exposure tracking, and data freshness at a glance</p>
+</div>
+
+<!-- Slide 6: Screenshot — Stock Portfolio -->
+<div class="slide screenshot-slide" data-slide="5">
+    <h2>Equity Portfolio</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/02_stocks_portfolio.png" alt="Stock Portfolio">
+    </div>
+    <p class="screenshot-caption">Live Alpaca positions with P&L, trailing stops, and one-click order management</p>
+</div>
+
+<!-- Slide 7: Screenshot — AI Signals -->
+<div class="slide screenshot-slide" data-slide="6">
+    <h2>AI Signal Generation</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/04_stocks_ai_signals.png" alt="AI Signals">
+    </div>
+    <p class="screenshot-caption">Claude-powered signals with confidence scores, entry/SL/TP levels, and natural-language reasoning</p>
+</div>
+
+<!-- Slide 8: Screenshot — Execution Analytics -->
+<div class="slide screenshot-slide" data-slide="7">
+    <h2>Execution Analytics</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/06_orders_execution.png" alt="Execution Analytics">
+    </div>
+    <p class="screenshot-caption">TCA dashboard: slippage tracking, maker fill %, execution quality diagnostics, order lifecycle funnel</p>
+</div>
+
+<!-- Slide 9: Screenshot — PnL & Performance -->
+<div class="slide screenshot-slide" data-slide="8">
+    <h2>PnL &amp; Performance</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/08_pnl_performance.png" alt="PnL Performance">
+    </div>
+    <p class="screenshot-caption">Equity curve, Sharpe/Sortino/VaR, PnL decomposition, analyst scoreboard, daily heatmap</p>
+</div>
+
+<!-- Slide 10: Screenshot — AI Analysis Report -->
+<div class="slide screenshot-slide" data-slide="9">
+    <h2>AI Execution Analysis</h2>
+    <div class="screenshot-wrapper">
+        <img src="screenshots/10_analysis_ai.png" alt="AI Analysis Report">
+    </div>
+    <p class="screenshot-caption">Claude-powered 7-day comprehensive report: latency, slippage, analyst quality, fee efficiency — score 72/100</p>
+</div>
+
+<!-- Slide 11: PnL Joke -->
+<div class="slide" data-slide="10">
+    <h1 style="font-size: clamp(24px, 3.5vw, 44px); text-align: center;">
+        I promise<br>
+        <span class="highlight-purple">my</span> and <span class="highlight-purple">yours</span> purple lines<br>
+        are <span class="highlight-red">not</span> the same
+    </h1>
+</div>
+
+<!-- Slide 12: Screenshot — Research & Monitoring -->
+<div class="slide screenshot-slide" data-slide="11">
+    <h2>Research &amp; System Health</h2>
+    <div class="screenshot-wrapper" style="display: flex; gap: 12px;">
+        <img src="screenshots/11_research.png" alt="Research" style="width: 50%;">
+        <img src="screenshots/13_system_monitoring.png" alt="System Monitoring" style="width: 50%;">
+    </div>
+    <p class="screenshot-caption">Multi-source sentiment scoring with AI chat &nbsp;|&nbsp; State consistency, latency, reliability trends</p>
+</div>
+
+<!-- Slide 13: Claude as the Full Team -->
+<div class="slide" data-slide="12">
+    <h2>Claude Code = Full Engineering Team</h2>
+    <div class="roles-grid">
+        <div class="role-card">
+            <div class="role-title highlight">Architect</div>
+            <div class="role-desc">Designed service-first modular architecture across 17 packages</div>
+        </div>
+        <div class="role-card">
+            <div class="role-title highlight-blue">Developer</div>
+            <div class="role-desc">56K lines of async Python with low-latency execution paths</div>
+        </div>
+        <div class="role-card">
+            <div class="role-title highlight-yellow">QA Engineer</div>
+            <div class="role-desc">2,402 tests covering race conditions, crashes, edge cases</div>
+        </div>
+        <div class="role-card">
+            <div class="role-title highlight-purple">DevOps</div>
+            <div class="role-desc">Monitoring, alerting, health checks, circuit breakers</div>
+        </div>
+        <div class="role-card">
+            <div class="role-title highlight-orange">Tech Writer</div>
+            <div class="role-desc">All documentation, architecture diagrams, and structure inventory</div>
+        </div>
+        <div class="role-card">
+            <div class="role-title highlight-red">Code Reviewer</div>
+            <div class="role-desc">File size limits, pattern consistency, zero regressions</div>
+        </div>
+    </div>
+    <p style="margin-top: 24px; text-align: center; font-size: 14px;">
+        The human was the <span class="highlight-yellow">product manager</span>. Claude was everything else.
+    </p>
+</div>
+
+<!-- Slide 14: The Secret Weapon -->
+<div class="slide" data-slide="13">
+    <h2>The Secret Weapon: CLAUDE.md</h2>
+    <p style="text-align: center; margin-bottom: 16px;">
+        A single file loaded every session. It never forgets the rules.
+    </p>
+    <div class="claudemd-block">
+        <div class="line"><span class="line-no">1</span><span class="comment"># Architecture constraints</span></div>
+        <div class="line"><span class="line-no">2</span><span class="key">Module limit:</span> <span class="val">500 lines soft, 1000 hard</span></div>
+        <div class="line"><span class="line-no">3</span><span class="key">Pattern:</span> <span class="val">Service-first, composition over inheritance</span></div>
+        <div class="line"><span class="line-no">4</span><span class="comment"># Performance requirements</span></div>
+        <div class="line"><span class="line-no">5</span><span class="key">Latency:</span> <span class="val">Low-latency signal-to-order</span></div>
+        <div class="line"><span class="line-no">6</span><span class="key">Network:</span> <span class="val">WSS-first, no REST polling</span></div>
+        <div class="line"><span class="line-no">7</span><span class="comment"># Quality gates</span></div>
+        <div class="line"><span class="line-no">8</span><span class="key">Tests:</span> <span class="val">Regression test mandatory for every bug fix</span></div>
+        <div class="line"><span class="line-no">9</span><span class="key">Guardrail:</span> <span class="val">Architecture check blocks oversized modules</span></div>
+        <div class="line"><span class="line-no">10</span><span class="comment"># Domain rules</span></div>
+        <div class="line"><span class="line-no">11</span><span class="key">Symbols:</span> <span class="val">Raw format internally (BTCUSDT), CCXT at boundary</span></div>
+        <div class="line"><span class="line-no">12</span><span class="key">Fees:</span> <span class="val">0.11% breakeven buffer (entry + exit taker)</span></div>
+    </div>
+    <p style="margin-top: 16px; text-align: center; font-size: 13px; color: var(--text-muted);">
+        Self-enforced via <span class="highlight-blue" style="font-family: 'JetBrains Mono', monospace;">scripts/check_architecture.py</span> &mdash; Claude wrote its own guardrails
+    </p>
+</div>
+
+<!-- Slide 15: Tech Stack -->
+<div class="slide" data-slide="14">
+    <h2>Tech Stack</h2>
+    <div style="width: 100%; max-width: 700px;">
+        <div class="tech-row">
+            <div class="tech-name highlight">uvloop</div>
+            <div class="tech-why">C-based event loop &mdash; 2-4x throughput over stdlib asyncio</div>
+        </div>
+        <div class="tech-row">
+            <div class="tech-name highlight-blue">msgspec</div>
+            <div class="tech-why">Zero-copy serialization with strict typing</div>
+        </div>
+        <div class="tech-row">
+            <div class="tech-name highlight-yellow">Raw WebSocket</div>
+            <div class="tech-why">No SDK abstraction &mdash; full Discord gateway protocol control</div>
+        </div>
+        <div class="tech-row">
+            <div class="tech-name highlight-purple">ccxt async</div>
+            <div class="tech-why">Bybit V5 unified API with async execution</div>
+        </div>
+        <div class="tech-row">
+            <div class="tech-name highlight-orange">SQLite</div>
+            <div class="tech-why">Zero-config persistence for state, analytics, and TCA</div>
+        </div>
+        <div class="tech-row">
+            <div class="tech-name highlight-red">structlog</div>
+            <div class="tech-why">Structured logging with key-value context for prod debugging</div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 16: Closing -->
+<div class="slide" data-slide="15">
+    <div class="logo" style="font-size: clamp(40px, 6vw, 72px); margin-bottom: 8px;">
+        <span class="v">V</span>ertex
+    </div>
+    <div class="divider"></div>
+    <div class="final-stats">
+        <div class="final-stat">
+            <span class="val highlight">113K</span>
+            <span class="lbl">Lines</span>
+        </div>
+        <div class="final-stat">
+            <span class="val highlight-blue">2,402</span>
+            <span class="lbl">Tests</span>
+        </div>
+        <div class="final-stat">
+            <span class="val highlight-yellow">450</span>
+            <span class="lbl">Commits</span>
+        </div>
+        <div class="final-stat">
+            <span class="val highlight-orange">37</span>
+            <span class="lbl">Days</span>
+        </div>
+        <div class="final-stat">
+            <span class="val highlight-red">0</span>
+            <span class="lbl">Engineers</span>
+        </div>
+    </div>
+    <div class="final-badge">
+        Built with <span class="highlight">Claude Code</span>. The human was the PM.
+    </div>
+</div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+    <div class="slide-counter"><span id="current">1</span>/<span id="total">16</span></div>
+    <div class="nav-dots" id="dots"></div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('current');
+const dotsContainer = document.getElementById('dots');
+let current = 0;
+
+slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+});
+
+function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, slides.length - 1));
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    counter.textContent = current + 1;
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        goTo(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        goTo(current - 1);
+    } else if (e.key === 'Home') {
+        goTo(0);
+    } else if (e.key === 'End') {
+        goTo(slides.length - 1);
+    }
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+});
+</script>
+</body>
+</html>
